@@ -1,11 +1,9 @@
 <h3>Create an Account</h3>
 
 <form class="ui form" [formGroup]="authForm">
-  <div class="field">
-    <label class="">Username</label>
-    <input formControlName="username" />
-  </div>
+  <app-input label="Username" [control]="authForm.controls.username" />
   {{ authForm.get("username")?.errors | json }}
+
   <div class="field">
     <label class="">Password</label>
     <input formControlName="password" />

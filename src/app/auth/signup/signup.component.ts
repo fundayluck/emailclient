@@ -4,11 +4,12 @@ import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatchPassword } from '../validators/match-password';
 import { UniqueUsername } from '../validators/unique-username';
+import { InputComponent } from '../../shared/input/input.component';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [ReactiveFormsModule, JsonPipe],
+  imports: [InputComponent, ReactiveFormsModule, JsonPipe],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
 })

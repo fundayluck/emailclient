@@ -1,4 +1,4 @@
-import { JsonPipe } from '@angular/common';
+import { CommonModule, JsonPipe } from '@angular/common';
 import { Component, Pipe } from '@angular/core';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -9,7 +9,7 @@ import { InputComponent } from '../../shared/input/input.component';
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [InputComponent, ReactiveFormsModule, JsonPipe],
+  imports: [InputComponent, ReactiveFormsModule, CommonModule, JsonPipe],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
 })

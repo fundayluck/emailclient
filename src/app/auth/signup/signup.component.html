@@ -17,6 +17,21 @@
     [control]="authForm.controls.confirmPassword"
   />
 
-  <button class="ui submit button primary">Sign Up</button>
+  <div
+    *ngIf="
+      authForm.controls.password.touched &&
+      authForm.controls.confirmPassword.touched &&
+      authForm.errors
+    "
+    class="ui red basic label"
+  >
+    <p *ngIf="authForm.errors?.['passwordsDontMatch']">
+      Password and Password Confirmation must match!
+    </p>
+  </div>
+
+  <div>
+    <button class="ui submit button primary">Sign Up</button>
+  </div>
   {{ authForm.errors | json }}
 </form>

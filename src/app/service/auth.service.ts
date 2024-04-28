@@ -40,4 +40,12 @@ export class AuthService {
       })
     );
   }
+
+  signout() {
+    return this.http.post(this.url + '/signout', {}).pipe(
+      tap(() => {
+        this.signedIn$.next(false);
+      })
+    );
+  }
 }

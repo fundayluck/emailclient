@@ -11,3 +11,7 @@ export interface signupCredentialsResponse {
 export interface SignupResponse {
   username: string;
 }
+
+export interface SignedinResponse {
+  authenticated: boolean;
+}

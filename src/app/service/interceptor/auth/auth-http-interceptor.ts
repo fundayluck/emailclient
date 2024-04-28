@@ -14,11 +14,13 @@ export const AuthHttpInterceptor = (
     withCredentials: true,
   });
 
-  return next(modifiedReq).pipe(
-    filter((val) => val.type === HttpEventType.Sent),
+  return next(modifiedReq);
 
-    tap((val) => {
-      console.log('Sent the request');
-    })
-  );
+  // .pipe(
+  //   filter((val) => val.type === HttpEventType.Sent),
+
+  //   tap((val) => {
+  //     console.log('Sent the request');
+  //   })
+  // );
 };

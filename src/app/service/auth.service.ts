@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
+  SignedinResponse,
   signupCredentialsResponse,
   SignupResponse,
   usernameAvailableResponse,
@@ -33,9 +34,9 @@ export class AuthService {
   }
 
   checkAuth() {
-    return this.http.get(this.url + '/signedin').pipe(
-      tap((response) => {
-        console.log(response);
+    return this.http.get<SignedinResponse>(this.url + '/signedin').pipe(
+      tap(({ authenticated }) => {
+        this.signedIn$.next(authenticated);
       })
     );
   }

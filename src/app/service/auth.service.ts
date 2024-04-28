@@ -9,14 +9,17 @@ interface usernameAvailableResponse {
   providedIn: 'root',
 })
 export class AuthService {
+  url = 'https://api.angular-email.com/auth';
+
   constructor(private http: HttpClient) {}
 
   usernameAvailable(username: string) {
-    return this.http.post<usernameAvailableResponse>(
-      'https://api.angular-email.com/auth/username',
-      {
-        username,
-      }
-    );
+    return this.http.post<usernameAvailableResponse>(this.url + '/username', {
+      username,
+    });
+  }
+
+  signup(credentials: any) {
+    return this.http.post<any>(this.url + '/signup', credentials);
   }
 }

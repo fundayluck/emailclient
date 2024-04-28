@@ -9,9 +9,9 @@ import {
 @Injectable({ providedIn: 'root' })
 export class MatchPassword implements Validator {
   validate(control: AbstractControl): ValidationErrors | null {
-    const { password, confirmPassword } = control.value;
+    const { password, passwordConfirmation } = control.value;
 
-    if (password === confirmPassword) {
+    if (password === passwordConfirmation) {
       return null;
     } else {
       return { passwordsDontMatch: true };

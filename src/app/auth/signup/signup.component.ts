@@ -5,6 +5,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { MatchPassword } from '../validators/match-password';
 import { UniqueUsername } from '../validators/unique-username';
 import { InputComponent } from '../../shared/input/input.component';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -31,7 +32,7 @@ export class SignupComponent {
         Validators.minLength(4),
         Validators.maxLength(20),
       ]),
-      confirmPassword: new FormControl('', [
+      passwordConfirmation: new FormControl('', [
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(20),
@@ -41,7 +42,20 @@ export class SignupComponent {
   );
 
   constructor(
+    private authService: AuthService,
     private uniqueUsername: UniqueUsername,
     private matchPassword: MatchPassword
   ) {}
+
+  onSubmit() {
+    if (this.authForm.invalid) {
+      return;
+    }
+
+    this.authService.signup(this.authForm.value).subscribe((response) => {
+      console.log(response);
+    });
+
+    console.log(this.authForm.value);
+  }
 }

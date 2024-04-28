@@ -52,7 +52,9 @@ export class SignupComponent {
       return;
     }
 
-    this.authService.signup(this.authForm.value).subscribe((response) => {
+    const formValue = this.authForm.value;
+
+    this.authService.signup(formValue).subscribe((response) => {
       console.log(response);
     });
 

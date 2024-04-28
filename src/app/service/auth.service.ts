@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-interface usernameAvailableResponse {
-  avalaible: boolean;
-}
+import {
+  signupCredentialsResponse,
+  SignupResponse,
+  usernameAvailableResponse,
+} from './response/auth/response-auth';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ export class AuthService {
     });
   }
 
-  signup(credentials: any) {
-    return this.http.post<any>(this.url + '/signup', credentials);
+  signup(credentials: signupCredentialsResponse) {
+    return this.http.post<SignupResponse>(this.url + '/signup', credentials);
   }
 }

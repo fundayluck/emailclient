@@ -6,6 +6,7 @@ import { MatchPassword } from '../validators/match-password';
 import { UniqueUsername } from '../validators/unique-username';
 import { InputComponent } from '../../shared/input/input.component';
 import { AuthService } from '../../service/auth.service';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
@@ -54,8 +55,13 @@ export class SignupComponent {
 
     const formValue = this.authForm.value;
 
-    this.authService.signup(formValue).subscribe((response) => {
-      console.log(response);
+    this.authService.signup(formValue).subscribe({
+      next: (response) => {},
+      error: (err) => {
+        if (!err.status) {
+          this.authForm.setErrors({ noConnection: true });
+        }
+      },
     });
 
     console.log(this.authForm.value);

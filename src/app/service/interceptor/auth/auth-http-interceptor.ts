@@ -1,6 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpEvent, HttpRequest, HttpHandlerFn } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {
+  HttpEvent,
+  HttpRequest,
+  HttpHandlerFn,
+  HttpEventType,
+} from '@angular/common/http';
+import { filter, Observable, tap } from 'rxjs';
 
 export const AuthHttpInterceptor = (
   req: HttpRequest<any>,
@@ -10,5 +14,11 @@ export const AuthHttpInterceptor = (
     withCredentials: true,
   });
 
-  return next(modifiedReq);
+  return next(modifiedReq).pipe(
+    filter((val) => val.type === HttpEventType.Sent),
+
+    tap((val) => {
+      console.log('Sent the request');
+    })
+  );
 };

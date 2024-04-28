@@ -5,12 +5,14 @@ import {
   SignupResponse,
   usernameAvailableResponse,
 } from './response/auth/response-auth';
+import { BehaviorSubject, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   url = 'https://api.angular-email.com/auth';
+  signedIn$ = new BehaviorSubject(false);
 
   constructor(private http: HttpClient) {}
 
@@ -21,6 +23,12 @@ export class AuthService {
   }
 
   signup(credentials: signupCredentialsResponse) {
-    return this.http.post<SignupResponse>(this.url + '/signup', credentials);
+    return this.http
+      .post<SignupResponse>(this.url + '/signup', credentials)
+      .pipe(
+        tap(() => {
+          this.signedIn$.next(true);
+        })
+      );
   }
 }

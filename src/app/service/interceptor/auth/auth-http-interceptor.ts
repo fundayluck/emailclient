@@ -3,9 +3,12 @@ import { HttpEvent, HttpRequest, HttpHandlerFn } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export const AuthHttpInterceptor = (
-  req: HttpRequest<unknown>,
+  req: HttpRequest<any>,
   next: HttpHandlerFn
 ): Observable<HttpEvent<any>> => {
-  console.log(req);
-  return next(req);
+  const modifiedReq = req.clone({
+    withCredentials: true,
+  });
+
+  return next(modifiedReq);
 };

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from './service/auth.service';
 import { CommonModule } from '@angular/common';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,13 +12,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  signedIn = false;
+  signedIn$!: BehaviorSubject<boolean>;
 
-  constructor(private authService: AuthService) {}
-
-  ngOnInit() {
-    this.authService.signedIn$.subscribe((signedin) => {
-      this.signedIn = signedin;
-    });
+  constructor(private authService: AuthService) {
+    this.signedIn$ = this.authService.signedIn$;
   }
 }

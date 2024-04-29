@@ -48,4 +48,12 @@ export class AuthService {
       })
     );
   }
+
+  signin(credentials: any) {
+    return this.http.post(this.url + '/signin', credentials).pipe(
+      tap(() => {
+        this.signedIn$.next(true);
+      })
+    );
+  }
 }

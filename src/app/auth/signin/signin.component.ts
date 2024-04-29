@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { InputComponent } from '../../shared/input/input.component';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -28,4 +29,14 @@ export class SigninComponent {
       Validators.maxLength(20),
     ]),
   });
+
+  constructor(private authService: AuthService) {}
+
+  onSubmit() {
+    if (this.authForm.invalid) {
+      return;
+    }
+
+    this.authService.signin(this.authForm.value).subscribe(() => {});
+  }
 }

@@ -1,1 +1,14 @@
-<p>signin works!</p>
+<h3>Sign In</h3>
+<form class="ui form" [formGroup]="authForm">
+  <app-input
+    inputType="text"
+    label="username"
+    [control]="authForm.controls.username"
+  />
+  <app-input
+    inputType="password"
+    label="username"
+    [control]="authForm.controls.password"
+  />
+  <button class="ui submit button primary">Sign In</button>
+</form>

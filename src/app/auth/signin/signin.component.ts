@@ -1,12 +1,31 @@
 import { Component } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { InputComponent } from '../../shared/input/input.component';
 
 @Component({
   selector: 'app-signin',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule, InputComponent],
   templateUrl: './signin.component.html',
-  styleUrl: './signin.component.css'
+  styleUrl: './signin.component.css',
 })
 export class SigninComponent {
-
+  authForm = new FormGroup({
+    username: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(20),
+      Validators.pattern(/^[a-z0-9]+$/),
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+      Validators.maxLength(20),
+    ]),
+  });
 }

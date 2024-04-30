@@ -7,11 +7,12 @@ import {
 } from '@angular/forms';
 import { InputComponent } from '../../shared/input/input.component';
 import { AuthService } from '../../service/auth.service';
+import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-signin',
   standalone: true,
-  imports: [ReactiveFormsModule, InputComponent],
+  imports: [ReactiveFormsModule, CommonModule, InputComponent],
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.css',
 })
@@ -37,6 +38,13 @@ export class SigninComponent {
       return;
     }
 
-    this.authService.signin(this.authForm.value).subscribe(() => {});
+    this.authService.signin(this.authForm.value).subscribe({
+      next: () => {},
+      error: ({ error }) => {
+        if (error.username || error.password) {
+          this.authForm.setErrors({ credentials: true });
+        }
+      },
+    });
   }
 }

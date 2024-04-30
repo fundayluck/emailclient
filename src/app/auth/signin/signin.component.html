@@ -10,5 +10,12 @@
     label="username"
     [control]="authForm.controls.password"
   />
-  <button class="ui submit button primary">Sign In</button>
+
+  <div *ngIf="authForm.errors" class="ui red basic label">
+    <p class="authForm.errors.credentials">Invalid username or password!</p>
+  </div>
+
+  <div>
+    <button class="ui submit button primary">Sign In</button>
+  </div>
 </form>

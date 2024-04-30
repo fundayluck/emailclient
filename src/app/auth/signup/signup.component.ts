@@ -7,6 +7,7 @@ import { UniqueUsername } from '../validators/unique-username';
 import { InputComponent } from '../../shared/input/input.component';
 import { AuthService } from '../../service/auth.service';
 import { catchError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -45,7 +46,8 @@ export class SignupComponent {
   constructor(
     private authService: AuthService,
     private uniqueUsername: UniqueUsername,
-    private matchPassword: MatchPassword
+    private matchPassword: MatchPassword,
+    private router: Router
   ) {}
 
   onSubmit() {
@@ -56,7 +58,9 @@ export class SignupComponent {
     const formValue = this.authForm.value;
 
     this.authService.signup(formValue).subscribe({
-      next: (response) => {},
+      next: (response) => {
+        this.router.navigateByUrl('/inbox');
+      },
       error: (err) => {
         if (!err.status) {
           this.authForm.setErrors({ noConnection: true });

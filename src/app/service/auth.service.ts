@@ -13,9 +13,13 @@ import { BehaviorSubject, tap } from 'rxjs';
 })
 export class AuthService {
   url = 'https://api.angular-email.com/auth';
-  signedIn$ = new BehaviorSubject(false);
+  signedIn$: BehaviorSubject<boolean | null> = new BehaviorSubject<
+    boolean | null
+  >(null);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    console.log(this.signedIn$);
+  }
 
   usernameAvailable(username: string) {
     return this.http.post<usernameAvailableResponse>(this.url + '/username', {

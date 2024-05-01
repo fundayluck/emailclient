@@ -25,11 +25,6 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.authService.checkAuth().subscribe((value) => {
-      if (value?.authenticated) {
-        this.router.navigateByUrl('/inbox');
-        return;
-      }
-    });
+    this.authService.checkAuth().subscribe(() => {});
   }
 }

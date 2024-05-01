@@ -15,4 +15,10 @@ export class EmailService {
       withCredentials: true,
     });
   }
+
+  getEmailById(id: string) {
+    return this.http.get<EmailSummary>(this.url + '/' + id, {
+      withCredentials: true,
+    });
+  }
 }

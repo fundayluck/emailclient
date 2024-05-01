@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { EmailIndexComponent } from '../email-index/email-index.component';
 import { RouterOutlet } from '@angular/router';
+import { NotFoundComponent } from '../not-found/not-found.component';
 
 @Component({
   selector: 'app-home',

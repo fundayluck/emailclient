@@ -13,10 +13,15 @@ export class EmailShowComponent {
   email!: Email;
 
   constructor(private route: ActivatedRoute) {
-    this.email = this.route.snapshot.data['email'];
-    this.route.data.subscribe(({ email }) => {
-      this.email = email;
-    });
+    console.log('emailshow', route);
+
+    if (this.route.snapshot.data['email']) {
+      this.email = this.route.snapshot.data['email'];
+      this.route.data.subscribe(({ email }) => {
+        this.email = email;
+      });
+      return;
+    }
   }
 
   ngOnInit() {}

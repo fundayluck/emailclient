@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { EmailService } from '../../service/email.service';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-email-index',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './email-index.component.html',
   styleUrl: './email-index.component.css',
 })

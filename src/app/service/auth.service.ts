@@ -17,9 +17,7 @@ export class AuthService {
     boolean | null
   >(null);
 
-  constructor(private http: HttpClient) {
-    console.log(this.signedIn$);
-  }
+  constructor(private http: HttpClient) {}
 
   usernameAvailable(username: string) {
     return this.http.post<usernameAvailableResponse>(this.url + '/username', {

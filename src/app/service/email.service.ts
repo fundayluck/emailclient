@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { EmailSummary } from './response/email/response-email';
+import { Email, EmailSummary } from './response/email/response-email';
 
 @Injectable({
   providedIn: 'root',
@@ -10,14 +10,14 @@ export class EmailService {
 
   constructor(private http: HttpClient) {}
 
-  getEmail() {
+  getEmails() {
     return this.http.get<EmailSummary[]>(this.url, {
       withCredentials: true,
     });
   }
 
-  getEmailById(id: string) {
-    return this.http.get<EmailSummary>(this.url + '/' + id, {
+  getEmail(id: string) {
+    return this.http.get<Email>(this.url + '/' + id, {
       withCredentials: true,
     });
   }

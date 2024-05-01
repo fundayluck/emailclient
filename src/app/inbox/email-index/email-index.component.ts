@@ -16,7 +16,7 @@ export class EmailIndexComponent {
   constructor(private emailService: EmailService) {}
 
   ngOnInit() {
-    this.emailService.getEmail().subscribe((emails) => {
+    this.emailService.getEmails().subscribe((emails) => {
       this.emails = emails;
     });
   }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { EmailService } from '../../service/email.service';
+import { EmailService } from '../../service/email/email.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 

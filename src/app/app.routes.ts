@@ -4,7 +4,7 @@ import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SignoutComponent } from './auth/signout/signout.component';
 import { AuthGuard } from './auth/auth.guard';
-import { PlaceholderComponent } from './inbox/placeholder/placeholder.component';
+import { emailResolver } from './service/email/email-resolver.service';
 
 export const routes: Routes = [
   { path: '', component: SigninComponent },
@@ -29,6 +29,9 @@ export const routes: Routes = [
           import('./inbox/email-show/email-show.component').then(
             (m) => m.EmailShowComponent
           ),
+        resolve: {
+          email: emailResolver,
+        },
       },
     ],
   },

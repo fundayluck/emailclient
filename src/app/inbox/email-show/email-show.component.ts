@@ -2,17 +2,18 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EmailService } from '../../service/email.service';
 import { switchMap } from 'rxjs/operators';
-import { JsonPipe } from '@angular/common';
+import { CommonModule, JsonPipe, NgIf } from '@angular/common';
+import { Email } from '../../service/response/email/response-email';
 
 @Component({
   selector: 'app-email-show',
   standalone: true,
-  imports: [JsonPipe],
+  imports: [CommonModule],
   templateUrl: './email-show.component.html',
   styleUrl: './email-show.component.css',
 })
 export class EmailShowComponent {
-  email: any = {};
+  email!: Email;
 
   constructor(
     private emailService: EmailService,
@@ -20,12 +21,6 @@ export class EmailShowComponent {
   ) {}
 
   ngOnInit() {
-    // this.route.params.subscribe(({ id }) => {
-    //   this.emailService.getEmail(id).subscribe((email) => {
-    //     this.email = email;
-    //   });
-    // });
-
     this.route.params
       .pipe(
         switchMap(({ id }) => {

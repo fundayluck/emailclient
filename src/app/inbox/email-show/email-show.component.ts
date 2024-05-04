@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Email } from '../../service/response/email/response-email';
+import { EmailReplyComponent } from '../email-reply/email-reply.component';
 
 @Component({
   selector: 'app-email-show',
   standalone: true,
-  imports: [],
+  imports: [EmailReplyComponent],
   templateUrl: './email-show.component.html',
   styleUrl: './email-show.component.css',
 })

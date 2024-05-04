@@ -1,6 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { Email } from '../../service/response/email/response-email';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { InputComponent } from '../../shared/input/input.component';
 
 @Component({
@@ -24,10 +29,10 @@ export class EmailFormComponent {
     const { subject, from, to, text } = this.email;
 
     this.emailForm = new FormGroup({
-      to: new FormControl(to),
-      subject: new FormControl(subject),
-      from: new FormControl(from),
-      text: new FormControl(text),
+      to: new FormControl(to, [Validators.required, Validators.email]),
+      subject: new FormControl(subject, [Validators.required]),
+      from: new FormControl({ value: from, disabled: true }),
+      text: new FormControl(text, [Validators.required]),
     });
   }
 }

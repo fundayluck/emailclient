@@ -10,6 +10,7 @@
       {{ control.errors?.['minlength'].requiredLength }}
       characters
     </p>
+    <p *ngIf="control.errors?.['email']">enter a valid email</p>
     <p *ngIf="control.errors?.['maxlength']">
       value you entered is
       {{ control.errors?.['maxlength'].actualLength }}

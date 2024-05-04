@@ -22,7 +22,7 @@ export class EmailCreateComponent {
       subject: '',
       html: '',
       text: '',
-      from: 'test11@example.com',
+      from: '',
     };
   }
 }

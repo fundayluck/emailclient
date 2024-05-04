@@ -14,9 +14,14 @@ export interface SignupResponse {
 
 export interface SignedinResponse {
   authenticated: boolean;
+  username: string;
 }
 
 export interface signinCredentialsResponse {
   username?: string | null;
   password?: string | null | undefined;
+}
+
+export interface SigninResponse {
+  username: string;
 }

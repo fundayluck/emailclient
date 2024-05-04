@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   SignedinResponse,
+  SigninResponse,
   signupCredentialsResponse,
   SignupResponse,
   usernameAvailableResponse,
@@ -16,6 +17,7 @@ export class AuthService {
   signedIn$: BehaviorSubject<boolean | null> = new BehaviorSubject<
     boolean | null
   >(null);
+  username = '';
 
   constructor(private http: HttpClient) {}
 
@@ -29,16 +31,18 @@ export class AuthService {
     return this.http
       .post<SignupResponse>(this.url + '/signup', credentials)
       .pipe(
-        tap(() => {
+        tap(({ username }) => {
           this.signedIn$.next(true);
+          this.username = username;
         })
       );
   }
 
   checkAuth() {
     return this.http.get<SignedinResponse>(this.url + '/signedin').pipe(
-      tap(({ authenticated }) => {
+      tap(({ authenticated, username }) => {
         this.signedIn$.next(authenticated);
+        this.username = username;
       })
     );
   }
@@ -52,10 +56,13 @@ export class AuthService {
   }
 
   signin(credentials: any) {
-    return this.http.post(this.url + '/signin', credentials).pipe(
-      tap(() => {
-        this.signedIn$.next(true);
-      })
-    );
+    return this.http
+      .post<SigninResponse>(this.url + '/signin', credentials)
+      .pipe(
+        tap(({ username }) => {
+          this.signedIn$.next(true);
+          this.username = username;
+        })
+      );
   }
 }

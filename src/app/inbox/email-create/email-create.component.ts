@@ -26,4 +26,9 @@ export class EmailCreateComponent {
       from: `${authService.username}@angular-email.com`,
     };
   }
+
+  onSubmit(email: Email) {
+    this.showModal = false;
+    console.log(email);
+  }
 }

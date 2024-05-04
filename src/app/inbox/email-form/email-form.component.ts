@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Email } from '../../service/response/email/response-email';
 import {
   FormControl,
@@ -22,8 +22,8 @@ export class EmailFormComponent {
     subject: FormControl<string | null>;
     text: FormControl<string | null>;
   }>;
-
   @Input() email!: Email;
+  @Output() emailSubmit = new EventEmitter();
 
   ngOnInit() {
     const { subject, from, to, text } = this.email;
@@ -34,5 +34,13 @@ export class EmailFormComponent {
       from: new FormControl({ value: from, disabled: true }),
       text: new FormControl(text, [Validators.required]),
     });
+  }
+
+  onSubmit() {
+    if (this.emailForm.invalid) {
+      return;
+    }
+
+    this.emailSubmit.emit(this.emailForm.value);
   }
 }

@@ -3,6 +3,7 @@ import { ModalComponent } from '../../shared/modal/modal.component';
 import { EmailFormComponent } from '../email-form/email-form.component';
 import { Email } from '../../service/response/email/response-email';
 import { CommonModule } from '@angular/common';
+import { EmailService } from '../../service/email/email.service';
 
 @Component({
   selector: 'app-email-reply',
@@ -15,11 +16,11 @@ export class EmailReplyComponent {
   showModal = false;
   @Input() email!: Email;
 
-  constructor() {
+  constructor(private emailService: EmailService) {
     console.log(this.showModal);
   }
 
-  ngOnInit() {
+  ngOnChanges() {
     const text = this.email.text.replace(/\n/gi, '\n> ');
 
     this.email = {
@@ -31,5 +32,9 @@ export class EmailReplyComponent {
     };
   }
 
-  onSubmit(email: Email) {}
+  onSubmit(email: Email) {
+    this.emailService.sendEmail(email).subscribe(() => {
+      this.showModal = false;
+    });
+  }
 }

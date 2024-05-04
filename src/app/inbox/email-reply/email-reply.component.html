@@ -1,4 +1,6 @@
-<button (click)="showModal = true" class="ui button primary">Replay</button>
+<button (click)="showModal = true" class="ui icon inverted button primary">
+  <i (click)="showModal = true" class="reply icon"></i>
+</button>
 
 <app-modal *ngIf="showModal" (dismiss)="showModal = false">
   <div modalTitle>Reply</div>

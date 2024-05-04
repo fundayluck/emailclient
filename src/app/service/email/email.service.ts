@@ -21,4 +21,8 @@ export class EmailService {
       withCredentials: true,
     });
   }
+
+  sendEmail(email: Email) {
+    return this.http.post<Email>(this.url, email);
+  }
 }

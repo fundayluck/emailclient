@@ -4,6 +4,7 @@ import { ModalComponent } from '../../shared/modal/modal.component';
 import { EmailFormComponent } from '../email-form/email-form.component';
 import { Email } from '../../service/response/email/response-email';
 import { AuthService } from '../../service/auth.service';
+import { EmailService } from '../../service/email/email.service';
 
 @Component({
   selector: 'app-email-create',
@@ -16,7 +17,10 @@ export class EmailCreateComponent {
   showModal: boolean = false;
   email: Email;
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private emailService: EmailService
+  ) {
     this.email = {
       id: '',
       to: '',
@@ -28,7 +32,8 @@ export class EmailCreateComponent {
   }
 
   onSubmit(email: Email) {
-    this.showModal = false;
-    console.log(email);
+    this.emailService.sendEmail(email).subscribe(() => {
+      this.showModal = false;
+    });
   }
 }
